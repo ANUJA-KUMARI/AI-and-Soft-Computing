@@ -828,3 +828,220 @@ The most important concepts are:
 10. Where BFS and DFS are useful.
 
 Once these ideas are clear, the C implementation becomes much easier to write yourself.
+
+
+# 38. Iterative BFS and DFS
+
+The repository also contains explicit iterative versions:
+
+- [BFS/bfs_iterative.c](../BFS/bfs_iterative.c)
+- [DFS/dfs_iterative.c](../DFS/dfs_iterative.c)
+
+## Important Observation: BFS Is Already Iterative
+
+BFS normally uses a queue and a loop:
+
+    while queue is not empty:
+        current = dequeue()
+        process current
+
+There is no need for recursive calls. Therefore, the original BFS implementation is already an **iterative BFS**.
+
+The separate bfs_iterative.c file makes this explicit and gives the repository a consistent naming scheme.
+
+## 39. Iterative DFS
+
+The recursive DFS implementation hides the stack inside the programming language's call stack.
+
+Recursive DFS:
+
+    DFS(current)
+        ↓
+    DFS(neighbor)
+        ↓
+    DFS(next neighbor)
+
+The computer stores these active function calls on the call stack.
+
+Iterative DFS creates that stack ourselves:
+
+    Stack s;
+
+and uses:
+
+    push()
+    pop()
+    isEmpty()
+
+So we replace recursion with an explicit data structure.
+
+## 40. Iterative DFS Algorithm
+
+The basic algorithm is:
+
+    1. Create visited array.
+    2. Create empty stack.
+    3. Push the starting vertex.
+    4. While stack is not empty:
+       a. Pop a vertex.
+       b. If already visited, skip it.
+       c. Mark it visited.
+       d. Process it.
+       e. Push its unvisited neighbors.
+
+This is the same depth-first idea, but the stack is now visible in our code.
+
+## 41. Why Does Iterative DFS Push Neighbors in Reverse Order?
+
+Suppose the current vertex has neighbors:
+
+    1, 2
+
+A stack is LIFO.
+
+If we push:
+
+    push(1)
+    push(2)
+
+then the next vertex popped is:
+
+    2
+
+So the traversal may become:
+
+    0 → 2 → ...
+
+If we want the smaller-numbered neighbor to be processed first, we push in reverse order:
+
+    push(2)
+    push(1)
+
+Now the top of the stack is 1, so:
+
+    pop() → 1
+
+This is why the iterative DFS code loops from vertices - 1 back down to 0.
+
+This does not change the fundamental DFS algorithm. It only controls the neighbor-processing order.
+
+## 42. Recursive DFS vs Iterative DFS
+
+| Feature | Recursive DFS | Iterative DFS |
+|---|---|---|
+| Stack | Hidden call stack | Explicit stack |
+| Main operation | Function call | push/pop |
+| Code style | Shorter | More explicit |
+| Risk | Deep recursion can overflow call stack | Explicit stack has controlled capacity |
+| Concept | DFS through recursion | DFS through stack |
+
+The important equivalence is:
+
+    Recursive DFS
+          ≈
+    Explicit Stack DFS
+
+Both implement depth-first exploration.
+
+## 43. Iterative DFS Dry Run
+
+Consider:
+
+            0
+           / \
+          1   2
+         / \   \
+        3   4   5
+
+Start at 0.
+
+Initial stack:
+
+    [0]
+
+Pop 0 and visit it.
+
+Neighbors are 1 and 2. Because we push in reverse order, we push 2 first and then 1:
+
+    [2, 1]
+
+The top is 1.
+
+Pop 1 and visit it:
+
+    Traversal: 0 1
+
+Its unvisited neighbors are 3 and 4. Push 4 first, then 3:
+
+    [2, 4, 3]
+
+Pop 3:
+
+    Traversal: 0 1 3
+
+3 has no new neighbors.
+
+Pop 4:
+
+    Traversal: 0 1 3 4
+
+Return to the stack. Pop 2:
+
+    Traversal: 0 1 3 4 2
+
+Then 2 discovers 5:
+
+    Traversal: 0 1 3 4 2 5
+
+So the iterative version can produce the same order as the recursive version when neighbor ordering is deliberately matched.
+
+## 44. One Important Difference in visited Handling
+
+There are two common iterative DFS styles.
+
+### Style A — Mark when pushing
+
+A vertex is marked visited when it enters the stack.
+
+This prevents duplicate insertion.
+
+### Style B — Mark when popping
+
+A vertex is marked visited when it is removed from the stack.
+
+Our implementation uses Style B and therefore checks:
+
+    if (visited[current])
+        continue;
+
+This is useful for understanding the stack directly, but it can mean that the same vertex is temporarily pushed more than once in graphs with multiple paths to that vertex.
+
+An alternative implementation can mark vertices when pushing them, similar to BFS.
+
+## 45. Big Picture
+
+Now the repository contains four useful implementations:
+
+    BFS
+     ├── bfs.c
+     └── bfs_iterative.c
+
+    DFS
+     ├── dfs.c
+     └── dfs_iterative.c
+
+Conceptually:
+
+    BFS
+     ↓
+    Queue + Loop
+
+    DFS Recursive
+     ↓
+    Recursion + Hidden Stack
+
+    DFS Iterative
+     ↓
+    Explicit Stack + Loop
+
+This comparison is important because it shows that the traversal strategy and the implementation mechanism are related but not identical concepts.
