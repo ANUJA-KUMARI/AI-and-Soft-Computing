@@ -24,8 +24,8 @@ For every algorithm, the goal is to provide:
 
 | Algorithm | Implementation | Notes |
 |---|---|---|
-| Breadth First Search (BFS) | [BFS/bfs.c](BFS/bfs.c) | [Detailed Notes](Notes/BFS-DFS-Notes.md) |
-| Depth First Search (DFS) | [DFS/dfs.c](DFS/dfs.c) | [Detailed Notes](Notes/BFS-DFS-Notes.md) |
+| Breadth First Search (BFS) | [BFS/bfs.c](BFS/bfs.c) · [Iterative](BFS/bfs_iterative.c) | [Detailed Notes](Notes/BFS-DFS-Notes.md) |
+| Depth First Search (DFS) | [DFS/dfs.c](DFS/dfs.c) · [Iterative](DFS/dfs_iterative.c) | [Detailed Notes](Notes/BFS-DFS-Notes.md) |
 
 ### Planned Topics
 
