@@ -27,11 +27,16 @@ For every algorithm, the goal is to provide:
 | Breadth First Search (BFS) | [BFS/bfs.c](BFS/bfs.c) · [Iterative](BFS/bfs_iterative.c) | [Detailed Notes](Notes/BFS-DFS-Notes.md) |
 | Depth First Search (DFS) | [DFS/dfs.c](DFS/dfs.c) · [Iterative](DFS/dfs_iterative.c) | [Detailed Notes](Notes/BFS-DFS-Notes.md) |
 
+### Local Search and Optimization
+
+| Algorithm | Implementation | Notes |
+|---|---|---|
+| Hill Climbing | [Hill-Climbing/hill_climbing.c](Hill-Climbing/hill_climbing.c) | [Detailed Notes](Notes/Hill-Climbing-Notes.md) |
+
 ### Planned Topics
 
 - Best First Search
 - A* Search
-- Hill Climbing
 - Simulated Annealing
 - Genetic Algorithms
 - Fuzzy Logic
@@ -56,20 +61,38 @@ It uses a **Queue**: First In → First Out.
 
 **Depth First Search** explores **as deeply as possible before backtracking**.
 
-Our implementation uses **recursion**, which internally behaves like a stack.
+Our implementation includes both **recursive and iterative** versions. The recursive version uses the program's call stack, while the iterative version uses an explicitly implemented stack.
+
+## Hill Climbing
+
+**Hill Climbing** is a local search and optimization technique.
+
+The basic idea is:
+
+> Start from a state, examine its neighbors, move to a better neighbor, and repeat until no better neighbor exists.
+
+The current implementation demonstrates this idea using:
+
+    f(x) = -(x - 5)^2 + 25
+
+The algorithm starts from a user-provided value of x, compares x - 1 and x + 1, and moves toward the better neighboring state.
+
+See the [Hill Climbing implementation](Hill-Climbing/hill_climbing.c) and [detailed notes](Notes/Hill-Climbing-Notes.md).
 
 ## Implementation Approach
 
 The current implementations use:
 
 - C
-- Adjacency matrix
+- Adjacency matrix for graph algorithms
 - visited array
 - Manually implemented queue for BFS
-- Recursion for DFS
-- No graph traversal library
+- Manually implemented stack for iterative DFS
+- Recursion for recursive DFS
+- Objective function and neighboring states for Hill Climbing
+- No ready-made traversal or optimization library
 
-This makes the code suitable for understanding the algorithm at a fundamental level.
+This makes the code suitable for understanding the algorithms at a fundamental level.
 
 ## Running the Programs
 
@@ -83,26 +106,31 @@ This makes the code suitable for understanding the algorithm at a fundamental le
     gcc DFS/dfs.c -o dfs
     ./dfs
 
-Example input:
+### Hill Climbing
 
-    Enter number of vertices: 6
-    Enter number of edges: 6
-    Enter each edge as: source destination
-    0 1
-    0 2
-    1 3
-    1 4
-    2 5
-    4 5
-    Enter starting vertex: 0
+    gcc Hill-Climbing/hill_climbing.c -o hill_climbing
+    ./hill_climbing
 
-The exact traversal order depends on the graph and the order in which neighboring vertices are checked.
+Example Hill Climbing run:
+
+    Enter starting value of x: 2
+    Current state: x = 2, f(x) = 16
+    Current state: x = 3, f(x) = 21
+    Current state: x = 4, f(x) = 24
+    Current state: x = 5, f(x) = 25
+
+    Hill Climbing stopped at: x = 5
+    Maximum value found: f(x) = 25
 
 ## Learning Path
 
     Understand the concept
             ↓
-    Draw a small graph
+    Draw a small problem
+            ↓
+    Identify states and neighbors
+            ↓
+    Identify the objective / heuristic function
             ↓
     Trace the algorithm manually
             ↓
@@ -120,15 +148,19 @@ Do not treat the implementations as code to memorize. The objective is to unders
 
 ## Detailed Notes
 
-For a complete beginner-friendly explanation of BFS and DFS, including graph terminology, adjacency matrix, visited array, queue implementation, recursion, stack behavior, dry runs, complexity, BFS vs DFS, common mistakes, and applications, see:
+For BFS and DFS, see:
 
 **[BFS & DFS Detailed Notes](Notes/BFS-DFS-Notes.md)**
+
+For Hill Climbing, including the objective function, neighbors, dry run, local maximum, plateau, ridge, variants, advantages, limitations, and comparison with BFS/DFS, see:
+
+**[Hill Climbing Detailed Notes](Notes/Hill-Climbing-Notes.md)**
 
 ## Contribution / Expansion
 
 As new algorithms are added, each topic should ideally contain its implementation, a short README, and detailed notes.
 
-The aim is to keep the repository useful not only as a code collection, but also as a **self-study reference**.
+The aim is to keep the repository useful not only as a **code collection**, but also as a **self-study reference**.
 
 ## Author
 
