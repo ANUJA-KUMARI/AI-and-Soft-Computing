@@ -33,6 +33,12 @@ For every algorithm, the goal is to provide:
 |---|---|---|
 | Hill Climbing | [Hill-Climbing/hill_climbing.c](Hill-Climbing/hill_climbing.c) | [Detailed Notes](Notes/Hill-Climbing-Notes.md) |
 
+### Heuristic Search
+
+| Algorithm | Implementation | Notes |
+|---|---|---|
+| AO* (AO-Star) | [AO-Star/ao_star.c](AO-Star/ao_star.c) | [Detailed Notes](Notes/AO-Star-Notes.md) |
+
 ### Planned Topics
 
 - Best First Search
@@ -79,6 +85,23 @@ The algorithm starts from a user-provided value of x, compares x - 1 and x + 1, 
 
 See the [Hill Climbing implementation](Hill-Climbing/hill_climbing.c) and [detailed notes](Notes/Hill-Climbing-Notes.md).
 
+## AO* (AO-Star)
+
+**AO*** is a heuristic search algorithm for **AND-OR graphs**.
+
+Unlike ordinary path-search algorithms, AO* can represent problems where:
+- an **OR node** means we can choose one alternative
+- an **AND node** means multiple subproblems must all be solved
+
+For a minimization problem:
+
+    OR  → choose the minimum-cost alternative
+    AND → combine the costs of all required children
+
+AO* therefore produces a **solution subgraph**, not necessarily one simple path.
+
+See the [AO* implementation](AO-Star/ao_star.c) and [detailed notes](Notes/AO-Star-Notes.md).
+
 ## Implementation Approach
 
 The current implementations use:
@@ -90,6 +113,7 @@ The current implementations use:
 - Manually implemented stack for iterative DFS
 - Recursion for recursive DFS
 - Objective function and neighboring states for Hill Climbing
+- AND-OR nodes, heuristic values, and cost propagation for AO*
 - No ready-made traversal or optimization library
 
 This makes the code suitable for understanding the algorithms at a fundamental level.
@@ -111,16 +135,15 @@ This makes the code suitable for understanding the algorithms at a fundamental l
     gcc Hill-Climbing/hill_climbing.c -o hill_climbing
     ./hill_climbing
 
-Example Hill Climbing run:
+### AO*
 
-    Enter starting value of x: 2
-    Current state: x = 2, f(x) = 16
-    Current state: x = 3, f(x) = 21
-    Current state: x = 4, f(x) = 24
-    Current state: x = 5, f(x) = 25
+    gcc AO-Star/ao_star.c -o ao_star
+    ./ao_star
 
-    Hill Climbing stopped at: x = 5
-    Maximum value found: f(x) = 25
+Example AO* output:
+
+    AO* estimated solution cost: 10
+    Solution graph: 0 1 3 4
 
 ## Learning Path
 
@@ -152,9 +175,13 @@ For BFS and DFS, see:
 
 **[BFS & DFS Detailed Notes](Notes/BFS-DFS-Notes.md)**
 
-For Hill Climbing, including the objective function, neighbors, dry run, local maximum, plateau, ridge, variants, advantages, limitations, and comparison with BFS/DFS, see:
+For Hill Climbing, see:
 
 **[Hill Climbing Detailed Notes](Notes/Hill-Climbing-Notes.md)**
+
+For AO*, including AND-OR graphs, OR/AND cost calculations, heuristic values, cost backup, solution graphs, comparisons, advantages, and limitations, see:
+
+**[AO* Detailed Notes](Notes/AO-Star-Notes.md)**
 
 ## Contribution / Expansion
 
