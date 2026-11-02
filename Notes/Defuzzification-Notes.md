@@ -99,17 +99,17 @@ Now calculate the weighted sum:
   + (4×0.6) + (5×0.8) + (6×0.8)
   + (7×0.6) + (8×0.4) + (9×0.2) + (10×0)
 
-= 20.5
+= 22.1
 ~~~
 
 Therefore:
 
 ~~~text
-Centroid = 20.5 / 4.1
-         = 5.0
+Centroid = 22.1 / 4.1
+         ≈ 5.3902
 ~~~
 
-**Final centroid = 5.0**
+**Final centroid ≈ 5.3902**
 
 # 5. Mean of Maxima (MOM) Method
 
@@ -172,7 +172,7 @@ For the example dataset:
 
 | Method | Crisp output |
 |---|---:|
-| Centroid | 5.0 |
+| Centroid | 5.3902 |
 | Mean of Maxima | 5.5 |
 
 Why are the answers different?
@@ -298,7 +298,7 @@ Expected output for the complete example dataset:
 
 ~~~text
 Results
-Centroid method       = 5.0000
+Centroid method       = 5.3902
 Mean of Maxima (MOM)  = 5.5000
 ~~~
 
