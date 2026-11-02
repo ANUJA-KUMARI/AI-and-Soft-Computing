@@ -38,7 +38,7 @@ For every algorithm, the goal is to provide:
 
 | Topic | Implementation | Notes |
 |---|---|---|
-| Triangular Membership Function | [Fuzzy-Membership-Functions/triangular_membership.c](Fuzzy-Membership-Functions/triangular_membership.c) | [Detailed Notes](Notes/Triangular-Membership-Function-Notes.md) |
+| Triangular Membership Function | [Fuzzy-Membership-Functions/triangular_membership.py](Fuzzy-Membership-Functions/triangular_membership.py) | [Detailed Notes](Notes/Triangular-Membership-Function-Notes.md) |
 
 ### Heuristic Search
 
@@ -120,7 +120,7 @@ The current implementations use:
 - Manually implemented stack for iterative DFS
 - Recursion for recursive DFS
 - Objective functions and neighboring states for basic and Steepest-Ascent Hill Climbing
-- Triangular fuzzy membership function with piecewise linear calculation
+- Triangular fuzzy membership function implemented in Python with piecewise linear calculation
 - AND-OR nodes, heuristic values, and cost propagation for AO*
 - No ready-made traversal or optimization library
 
