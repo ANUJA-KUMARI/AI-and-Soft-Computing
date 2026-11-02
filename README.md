@@ -39,6 +39,7 @@ For every algorithm, the goal is to provide:
 | Topic | Implementation | Notes |
 |---|---|---|
 | Triangular Membership Function | [Fuzzy-Membership-Functions/triangular_membership.py](Fuzzy-Membership-Functions/triangular_membership.py) | [Detailed Notes](Notes/Triangular-Membership-Function-Notes.md) |
+| Defuzzification (Centroid and MOM) | [Fuzzy-Defuzzification/defuzzification.py](Fuzzy-Defuzzification/defuzzification.py) | [Detailed Notes](Notes/Defuzzification-Notes.md) |
 
 ### Heuristic Search
 
@@ -121,6 +122,7 @@ The current implementations use:
 - Recursion for recursive DFS
 - Objective functions and neighboring states for basic and Steepest-Ascent Hill Climbing
 - Triangular fuzzy membership function implemented in Python with piecewise linear calculation
+- Defuzzification using Centroid and Mean of Maxima (MOM) methods in Python
 - AND-OR nodes, heuristic values, and cost propagation for AO*
 - No ready-made traversal or optimization library
 
@@ -145,8 +147,11 @@ This makes the code suitable for understanding the algorithms at a fundamental l
 
 ### Triangular Fuzzy Membership Function
 
-    gcc Fuzzy-Membership-Functions/triangular_membership.c -o triangular_membership
-    ./triangular_membership
+    python Fuzzy-Membership-Functions/triangular_membership.py
+
+### Defuzzification (Centroid and MOM)
+
+    python Fuzzy-Defuzzification/defuzzification.py
 
 ### AO*
 
@@ -195,6 +200,10 @@ For Hill Climbing, see:
 For the Triangular Fuzzy Membership Function, see:
 
 **[Triangular Membership Function Notes](Notes/Triangular-Membership-Function-Notes.md)**
+
+For Defuzzification using Centroid and Mean of Maxima, see:
+
+**[Defuzzification Notes](Notes/Defuzzification-Notes.md)**
 
 For AO*, including AND-OR graphs, OR/AND cost calculations, heuristic values, cost backup, solution graphs, comparisons, advantages, and limitations, see:
 
