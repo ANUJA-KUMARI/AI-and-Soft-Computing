@@ -1,28 +1,32 @@
-# Triangular Fuzzy Membership Function — Complete Notes
+# Triangular Fuzzy Membership Function — Python Lab
 
-## 1. What is a Fuzzy Membership Function?
+## 1. Aim
 
-In classical set theory, an element either belongs to a set or does not belong to it. Fuzzy logic allows partial membership.
+To implement a **Triangular Fuzzy Membership Function** in Python and calculate the degree to which an input value belongs to a fuzzy set.
 
-A membership function maps an input value to a degree between 0 and 1:
+## 2. What is a Fuzzy Membership Function?
+
+In classical set theory, an element either belongs to a set or does not belong to it.
+
+Fuzzy logic allows partial membership. A membership function maps an input value to a degree between 0 and 1:
 
 ~~~text
 μ(x) ∈ [0, 1]
 ~~~
 
-- 0 means no membership.
-- 1 means full membership.
-- A value between 0 and 1 means partial membership.
+- **0:** no membership.
+- **1:** full membership.
+- **Between 0 and 1:** partial membership.
 
-For example, a temperature might belong to the fuzzy set "Warm" with membership degree 0.6.
+For example, a temperature may belong to the fuzzy set "Warm" with membership degree 0.6.
 
-## 2. What is a Triangular Membership Function?
+## 3. What is a Triangular Membership Function?
 
-A triangular membership function is one of the simplest fuzzy membership functions. It has a triangle-shaped graph defined by three parameters:
+A triangular membership function is one of the simplest fuzzy membership functions. Its graph has a triangular shape and is defined by three parameters:
 
-- **a:** left endpoint; membership is 0.
-- **b:** peak; membership is 1.
-- **c:** right endpoint; membership is 0.
+- **a:** left endpoint, where membership is 0.
+- **b:** peak, where membership is 1.
+- **c:** right endpoint, where membership is 0.
 
 The parameters must satisfy:
 
@@ -30,45 +34,23 @@ The parameters must satisfy:
 a < b < c
 ~~~
 
-## 3. Mathematical Formula
+## 4. Mathematical Formula
 
 ~~~text
-             0,                  x <= a or x >= c
+μ(x) = 0                 if x <= a or x >= c
 
-             (x - a) / (b - a), a < x < b
+       (x - a) / (b-a)   if a < x <= b
 
-μ(x) =       1,                  x = b
-
-             (c - x) / (c - b), b < x < c
+       (c - x) / (c-b)   if b < x < c
 ~~~
 
-The result is always between 0 and 1 when the parameters are valid.
+At x = b, both sides meet at membership 1. The formula can also be written as a separate case for x = b.
 
-## 4. Understand the Regions
+### Understand the three regions
 
-**Outside the triangle:** If x <= a or x >= c, membership is 0.
-
-**Increasing slope:** If a < x < b:
-
-~~~text
-μ(x) = (x - a) / (b - a)
-~~~
-
-Membership increases linearly from 0 to 1.
-
-**Peak:** At x = b:
-
-~~~text
-μ(x) = 1
-~~~
-
-**Decreasing slope:** If b < x < c:
-
-~~~text
-μ(x) = (c - x) / (c - b)
-~~~
-
-Membership decreases linearly from 1 to 0.
+1. **Outside the triangle:** membership is 0.
+2. **Rising side (a to b):** membership increases linearly from 0 to 1.
+3. **Falling side (b to c):** membership decreases linearly from 1 to 0.
 
 ## 5. Worked Example
 
@@ -94,6 +76,14 @@ c = 30
 | 30 | Right endpoint | 0.0 |
 | 35 | Outside triangle | 0.0 |
 
+For example, when x = 15:
+
+~~~text
+μ(15) = (15 - 10) / (20 - 10)
+      = 5 / 10
+      = 0.5
+~~~
+
 ## 6. Shape of the Function
 
 For a = 10, b = 20, and c = 30:
@@ -116,67 +106,82 @@ The left side rises linearly and the right side falls linearly.
 ~~~text
 TRIANGULAR-MEMBERSHIP(x, a, b, c)
 
-if a >= b or b >= c:
-    report invalid parameters
+1. Check that a < b < c.
+   If not, report invalid parameters.
 
-if x <= a or x >= c:
-    return 0
+2. If x <= a or x >= c:
+       return 0
 
-if x == b:
-    return 1
+3. If x == b:
+       return 1
 
-if x < b:
-    return (x - a) / (b - a)
+4. If x < b:
+       return (x - a) / (b - a)
 
-otherwise:
-    return (c - x) / (c - b)
+5. Otherwise:
+       return (c - x) / (c - b)
 ~~~
 
-## 8. C Implementation
+## 8. Python Implementation
 
 The program is stored at:
 
 ~~~text
-Fuzzy-Membership-Functions/triangular_membership.c
+Fuzzy-Membership-Functions/triangular_membership.py
 ~~~
 
-It reads a, b, c, and x; validates the parameter order; calculates the membership degree; and prints the result.
+It uses two parts:
 
-The function uses the double data type because membership values can be decimal numbers such as 0.25, 0.6, or 0.85.
+- `triangular_membership(x, a, b, c)`: reusable function that calculates the membership degree.
+- `main()`: reads values from the user, validates the parameters, calls the function, and displays the result.
 
-## 9. Understanding the Code
+No external fuzzy-logic library is used. The piecewise formula is implemented directly in Python.
 
-**Endpoint check**
+## 9. Understanding the Python Code
 
-~~~c
-if (x <= a || x >= c) return 0.0;
+### Parameter validation
+
+~~~python
+if not (a < b < c):
+    raise ValueError("Parameters must satisfy a < b < c.")
 ~~~
 
-At and outside the endpoints, membership is zero.
+The left endpoint must be smaller than the peak, and the peak must be smaller than the right endpoint. Otherwise, the triangle is invalid.
 
-**Peak check**
+### Outside the triangle
 
-~~~c
-if (x == b) return 1.0;
+~~~python
+if x <= a or x >= c:
+    return 0.0
 ~~~
 
-At the peak, membership is one.
+At and outside the two endpoints, membership is zero.
 
-**Increasing side**
+### At the peak
 
-~~~c
-if (x < b) return (x - a) / (b - a);
+~~~python
+if x == b:
+    return 1.0
 ~~~
 
-This calculates the rising side.
+The peak has full membership.
 
-**Decreasing side**
+### Rising side
 
-~~~c
-return (c - x) / (c - b);
+~~~python
+if x < b:
+    return (x - a) / (b - a)
 ~~~
 
-After the earlier checks, this calculates the falling side.
+This calculates the linearly increasing membership value.
+
+### Falling side
+
+~~~python
+return (c - x) / (c - b)
+~~~
+
+If execution reaches this line, x is between b and c. This calculates the decreasing membership value.
 
 ## 10. Sample Input and Output
 
@@ -195,32 +200,29 @@ Output:
 Membership degree = 0.50
 ~~~
 
-Calculation:
+Therefore, x = 15 belongs to this fuzzy set with membership degree 0.5.
 
-~~~text
-μ(15) = (15 - 10) / (20 - 10)
-      = 5 / 10
-      = 0.5
-~~~
+## 11. How to Run the Program
 
-So, input 15 belongs to this fuzzy set with membership degree 0.5.
-
-## 11. Compile and Run
-
-From the repository root:
+Open a terminal in the repository's root directory and run:
 
 ~~~bash
-gcc Fuzzy-Membership-Functions/triangular_membership.c -o triangular_membership
-./triangular_membership
+python Fuzzy-Membership-Functions/triangular_membership.py
+~~~
+
+If your system uses the `python3` command:
+
+~~~bash
+python3 Fuzzy-Membership-Functions/triangular_membership.py
 ~~~
 
 ## 12. Common Mistakes
 
-1. **Using integer division:** use double values so results such as 0.5 are not truncated.
-2. **Invalid parameter order:** always check a < b < c.
-3. **Forgetting endpoints:** membership is 0 at x = a and x = c.
-4. **Forgetting the peak:** membership is 1 at x = b.
-5. **Mixing up formulas:** use (x - a)/(b - a) on the rising side and (c - x)/(c - b) on the falling side.
+1. **Invalid parameter order:** always check a < b < c.
+2. **Forgetting endpoints:** membership is 0 at x = a and x = c.
+3. **Forgetting the peak:** membership is 1 at x = b.
+4. **Mixing up formulas:** use (x-a)/(b-a) on the rising side and (c-x)/(c-b) on the falling side.
+5. **Using integer division in other languages:** membership values can be decimals, so use floating-point arithmetic. Python's `/` operator performs division and returns a floating-point result.
 
 ## 13. Important Exam Points
 
@@ -231,7 +233,7 @@ gcc Fuzzy-Membership-Functions/triangular_membership.c -o triangular_membership
 - At and outside endpoints a and c, membership is 0.
 - It is simple and computationally inexpensive.
 
-**One-line answer:** A triangular membership function represents fuzzy-set membership using a triangle defined by left endpoint a, peak b, and right endpoint c.
+**One-line answer:** A triangular membership function represents fuzzy-set membership using a triangle defined by a left endpoint a, peak b, and right endpoint c.
 
 ## 14. Quick Practice
 
