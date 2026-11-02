@@ -31,7 +31,7 @@ For every algorithm, the goal is to provide:
 
 | Algorithm | Implementation | Notes |
 |---|---|---|
-| Hill Climbing | [Hill-Climbing/hill_climbing.c](Hill-Climbing/hill_climbing.c) | [Detailed Notes](Notes/Hill-Climbing-Notes.md) |
+| Hill Climbing (Basic) | [Hill-Climbing/hill_climbing.c](Hill-Climbing/hill_climbing.c) | [Detailed Notes](Notes/Hill-Climbing-Notes.md) |\n| Steepest-Ascent Hill Climbing | [Hill-Climbing/steepest_ascent_hill_climbing.c](Hill-Climbing/steepest_ascent_hill_climbing.c) | [Detailed Notes](Notes/Steepest-Ascent-Hill-Climbing-Notes.md) |
 
 ### Heuristic Search
 
@@ -77,13 +77,13 @@ The basic idea is:
 
 > Start from a state, examine its neighbors, move to a better neighbor, and repeat until no better neighbor exists.
 
-The current implementation demonstrates this idea using:
+The basic implementation demonstrates this idea using:
 
     f(x) = -(x - 5)^2 + 25
 
 The algorithm starts from a user-provided value of x, compares x - 1 and x + 1, and moves toward the better neighboring state.
 
-See the [Hill Climbing implementation](Hill-Climbing/hill_climbing.c) and [detailed notes](Notes/Hill-Climbing-Notes.md).
+See the [basic Hill Climbing implementation](Hill-Climbing/hill_climbing.c), the [Steepest-Ascent implementation](Hill-Climbing/steepest_ascent_hill_climbing.c), and the [detailed notes](Notes/Hill-Climbing-Notes.md) and [Steepest-Ascent notes](Notes/Steepest-Ascent-Hill-Climbing-Notes.md).
 
 ## AO* (AO-Star)
 
@@ -112,7 +112,7 @@ The current implementations use:
 - Manually implemented queue for BFS
 - Manually implemented stack for iterative DFS
 - Recursion for recursive DFS
-- Objective function and neighboring states for Hill Climbing
+- Objective functions and neighboring states for basic and Steepest-Ascent Hill Climbing
 - AND-OR nodes, heuristic values, and cost propagation for AO*
 - No ready-made traversal or optimization library
 
