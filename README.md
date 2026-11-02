@@ -31,7 +31,14 @@ For every algorithm, the goal is to provide:
 
 | Algorithm | Implementation | Notes |
 |---|---|---|
-| Hill Climbing (Basic) | [Hill-Climbing/hill_climbing.c](Hill-Climbing/hill_climbing.c) | [Detailed Notes](Notes/Hill-Climbing-Notes.md) |\n| Steepest-Ascent Hill Climbing | [Hill-Climbing/steepest_ascent_hill_climbing.c](Hill-Climbing/steepest_ascent_hill_climbing.c) | [Detailed Notes](Notes/Steepest-Ascent-Hill-Climbing-Notes.md) |
+| Hill Climbing (Basic) | [Hill-Climbing/hill_climbing.c](Hill-Climbing/hill_climbing.c) | [Detailed Notes](Notes/Hill-Climbing-Notes.md) |
+| Steepest-Ascent Hill Climbing | [Hill-Climbing/steepest_ascent_hill_climbing.c](Hill-Climbing/steepest_ascent_hill_climbing.c) | [Detailed Notes](Notes/Steepest-Ascent-Hill-Climbing-Notes.md) |
+
+### Fuzzy Logic
+
+| Topic | Implementation | Notes |
+|---|---|---|
+| Triangular Membership Function | [Fuzzy-Membership-Functions/triangular_membership.c](Fuzzy-Membership-Functions/triangular_membership.c) | [Detailed Notes](Notes/Triangular-Membership-Function-Notes.md) |
 
 ### Heuristic Search
 
@@ -113,6 +120,7 @@ The current implementations use:
 - Manually implemented stack for iterative DFS
 - Recursion for recursive DFS
 - Objective functions and neighboring states for basic and Steepest-Ascent Hill Climbing
+- Triangular fuzzy membership function with piecewise linear calculation
 - AND-OR nodes, heuristic values, and cost propagation for AO*
 - No ready-made traversal or optimization library
 
@@ -134,6 +142,11 @@ This makes the code suitable for understanding the algorithms at a fundamental l
 
     gcc Hill-Climbing/hill_climbing.c -o hill_climbing
     ./hill_climbing
+
+### Triangular Fuzzy Membership Function
+
+    gcc Fuzzy-Membership-Functions/triangular_membership.c -o triangular_membership
+    ./triangular_membership
 
 ### AO*
 
@@ -178,6 +191,10 @@ For BFS and DFS, see:
 For Hill Climbing, see:
 
 **[Hill Climbing Detailed Notes](Notes/Hill-Climbing-Notes.md)**
+
+For the Triangular Fuzzy Membership Function, see:
+
+**[Triangular Membership Function Notes](Notes/Triangular-Membership-Function-Notes.md)**
 
 For AO*, including AND-OR graphs, OR/AND cost calculations, heuristic values, cost backup, solution graphs, comparisons, advantages, and limitations, see:
 
