@@ -126,7 +126,7 @@ The current implementations use:
 - Defuzzification using Centroid and Mean of Maxima (MOM) methods in Python
 - Mamdani Fuzzy Inference System using MIN implication, MAX aggregation, and Centroid defuzzification
 - AND-OR nodes, heuristic values, and cost propagation for AO*
-- A* pathfinding using g(n), h(n), f(n), an open set, and parent tracking
+- A* pathfinding using a predefined graph, g(n), h(n), f(n), an open set, and parent tracking
 - No ready-made traversal or optimization library
 
 This makes the code suitable for understanding the algorithms at a fundamental level.
