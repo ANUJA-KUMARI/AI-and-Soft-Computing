@@ -10,8 +10,7 @@ int objectiveFunction(int x) {
     return -(x - 5) * (x - 5) + 25;
 }
 
-void hillClimbing(int start) {
-    int current = start;
+void hillClimbing(int current) {
 
     while (1) {
         int currentValue = objectiveFunction(current);
@@ -36,12 +35,12 @@ void hillClimbing(int start) {
 }
 
 int main(void) {
-    int start;
+    int current;
 
     printf("Enter starting value of x: ");
-    scanf("%d", &start);
+    scanf("%d", &current);
 
-    hillClimbing(start);
+    hillClimbing(current);
 
     return 0;
 }
