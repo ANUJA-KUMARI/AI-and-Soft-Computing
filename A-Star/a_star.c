@@ -8,7 +8,7 @@ int main(void) {
     int graph[MAX][MAX] = {0};
     int heuristic[MAX];
     int g[MAX], parent[MAX];
-    int open[MAX] = {0}, closed[MAX] = {0};
+    int open[MAX] = {0};
     int start, goal;
 
     printf("Enter number of nodes (maximum %d): ", MAX);
@@ -82,7 +82,6 @@ int main(void) {
         }
 
         open[current] = 0;
-        closed[current] = 1;
 
         for (int next = 0; next < n; next++) {
             if (graph[current][next] > 0) {
@@ -92,7 +91,6 @@ int main(void) {
                     g[next] = newG;
                     parent[next] = current;
                     open[next] = 1;
-                    closed[next] = 0;
                 }
             }
         }
