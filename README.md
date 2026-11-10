@@ -33,6 +33,7 @@ For every algorithm, the goal is to provide:
 |---|---|---|
 | Hill Climbing (Basic) | [Hill-Climbing/hill_climbing.c](Hill-Climbing/hill_climbing.c) | [Detailed Notes](Notes/Hill-Climbing-Notes.md) |
 | Steepest-Ascent Hill Climbing | [Hill-Climbing/steepest_ascent_hill_climbing.c](Hill-Climbing/steepest_ascent_hill_climbing.c) | [Detailed Notes](Notes/Steepest-Ascent-Hill-Climbing-Notes.md) |
+| Basic Genetic Algorithm | [Genetic-Algorithm/genetic_algorithm.c](Genetic-Algorithm/genetic_algorithm.c) | [Detailed Notes](Notes/Genetic-Algorithm-Notes.md) |
 
 ### Fuzzy Logic
 
@@ -53,8 +54,6 @@ For every algorithm, the goal is to provide:
 
 - Best First Search
 - Simulated Annealing
-- Genetic Algorithms
-- Fuzzy Logic
 - Neural Network fundamentals
 - Other AI and Soft Computing techniques
 
@@ -94,6 +93,27 @@ The algorithm starts from a user-provided value of x, compares x - 1 and x + 1, 
 
 See the [basic Hill Climbing implementation](Hill-Climbing/hill_climbing.c), the [Steepest-Ascent implementation](Hill-Climbing/steepest_ascent_hill_climbing.c), and the [detailed notes](Notes/Hill-Climbing-Notes.md) and [Steepest-Ascent notes](Notes/Steepest-Ascent-Hill-Climbing-Notes.md).
 
+## Genetic Algorithm
+
+A **Genetic Algorithm (GA)** is a population-based optimization technique inspired by natural evolution.
+
+The implementation searches for an integer x from 0 to 31 to maximize:
+
+    f(x) = x^2
+
+It represents each candidate solution as a five-bit chromosome and demonstrates:
+
+- Random population initialization
+- Fitness evaluation
+- Roulette-wheel selection
+- Single-point crossover
+- Bit-flip mutation
+- Replacement and generation tracking
+
+The program tracks the best solution found so far. It does not use elitism, and because the search is stochastic, it is not guaranteed to find the theoretical optimum in every run.
+
+See the [C implementation](Genetic-Algorithm/genetic_algorithm.c), the [algorithm README](Genetic-Algorithm/README.md), and the [detailed notes](Notes/Genetic-Algorithm-Notes.md).
+
 ## AO* (AO-Star)
 
 **AO*** is a heuristic search algorithm for **AND-OR graphs**.
@@ -122,6 +142,7 @@ The current implementations use:
 - Manually implemented stack for iterative DFS
 - Recursion for recursive DFS
 - Objective functions and neighboring states for basic and Steepest-Ascent Hill Climbing
+- Binary chromosomes, roulette-wheel selection, single-point crossover, and bit-flip mutation for Genetic Algorithm
 - Triangular fuzzy membership function implemented in Python with piecewise linear calculation
 - Defuzzification using Centroid and Mean of Maxima (MOM) methods in Python
 - Mamdani Fuzzy Inference System using MIN implication, MAX aggregation, and Centroid defuzzification
@@ -147,6 +168,11 @@ This makes the code suitable for understanding the algorithms at a fundamental l
 
     gcc Hill-Climbing/hill_climbing.c -o hill_climbing
     ./hill_climbing
+
+### Genetic Algorithm
+
+    gcc -std=c11 -Wall -Wextra -pedantic Genetic-Algorithm/genetic_algorithm.c -o genetic_algorithm
+    ./genetic_algorithm
 
 ### Triangular Fuzzy Membership Function
 
@@ -220,6 +246,10 @@ For Defuzzification using Centroid and Mean of Maxima, see:
 For the Mamdani Fuzzy Inference System, see:
 
 **[Mamdani FIS Notes](Notes/Mamdani-FIS-Notes.md)**
+
+For Genetic Algorithms, including binary encoding, fitness evaluation, roulette-wheel selection, crossover, mutation, a dry run, complexity, and viva questions, see:
+
+**[Genetic Algorithm Notes](Notes/Genetic-Algorithm-Notes.md)**
 
 For AO*, including AND-OR graphs, OR/AND cost calculations, heuristic values, cost backup, solution graphs, comparisons, advantages, and limitations, see:
 
