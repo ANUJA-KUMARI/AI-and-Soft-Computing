@@ -47,11 +47,11 @@ For every algorithm, the goal is to provide:
 | Algorithm | Implementation | Notes |
 |---|---|---|
 | AO* (AO-Star) | [AO-Star/ao_star.c](AO-Star/ao_star.c) | [Detailed Notes](Notes/AO-Star-Notes.md) |
+| A* Search | [A-Star/a_star.c](A-Star/a_star.c) | [Detailed Notes](Notes/A-Star-Notes.md) |
 
 ### Planned Topics
 
 - Best First Search
-- A* Search
 - Simulated Annealing
 - Genetic Algorithms
 - Fuzzy Logic
@@ -126,6 +126,7 @@ The current implementations use:
 - Defuzzification using Centroid and Mean of Maxima (MOM) methods in Python
 - Mamdani Fuzzy Inference System using MIN implication, MAX aggregation, and Centroid defuzzification
 - AND-OR nodes, heuristic values, and cost propagation for AO*
+- A* pathfinding using g(n), h(n), f(n), an open set, and parent tracking
 - No ready-made traversal or optimization library
 
 This makes the code suitable for understanding the algorithms at a fundamental level.
@@ -163,6 +164,11 @@ This makes the code suitable for understanding the algorithms at a fundamental l
 
     gcc AO-Star/ao_star.c -o ao_star
     ./ao_star
+
+### A* Search
+
+    gcc A-Star/a_star.c -o a_star
+    ./a_star
 
 Example AO* output:
 
@@ -218,6 +224,10 @@ For the Mamdani Fuzzy Inference System, see:
 For AO*, including AND-OR graphs, OR/AND cost calculations, heuristic values, cost backup, solution graphs, comparisons, advantages, and limitations, see:
 
 **[AO* Detailed Notes](Notes/AO-Star-Notes.md)**
+
+For A* Search, including g(n), h(n), f(n), the open set, path reconstruction, a dry run, and viva questions, see:
+
+**[A* Search Notes](Notes/A-Star-Notes.md)**
 
 ## Contribution / Expansion
 
